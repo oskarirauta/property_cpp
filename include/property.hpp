@@ -57,11 +57,11 @@ class Property {
 		Setter set;
 };
 
-std::ostream &operator<<(std::ostream &os, Property<std::string>::ReadOnly const &m) {
+inline std::ostream &operator<<(std::ostream &os, Property<std::string>::ReadOnly const &m) {
 	return os << std::string(m);
 }
 
-std::ostream &operator<<(std::ostream &os, Property<std::string> const &m) {
+inline std::ostream &operator<<(std::ostream &os, Property<std::string> const &m) {
 	return os << std::string(m);
 }
 
