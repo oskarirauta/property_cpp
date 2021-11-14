@@ -6,6 +6,8 @@ const int _value2 = 100;
 const int _value3 = 200;
 const int _value4 = 250;
 
+const int _value5 = 500;
+
 class TestClass {
 
 	public:
@@ -30,15 +32,22 @@ class TestClass {
 		// staticReadOnly returns value3, but does not allow setting.
 		Property<int>::ReadOnly staticReadOnly { this -> value3 };
 
+		Property<int> dynamicCalculated {
+				this -> value2, // not used but must be introduced..
+				[&](int &r) { return this -> value5 == 500 ? 9 : 0; },
+				nullptr
+		};
+
 		TestClass() {
 			this -> value1 = _value1;
 			this -> value2 = _value2;
 			this -> value3 = _value3;
 			this -> value4 = _value4;
+			this -> value5 = _value5;
 		}
 
 	private:
-		int value1, value2, value3, value4;
+		int value1, value2, value3, value4, value5;
 
 };
 
@@ -55,12 +64,15 @@ int main() {
 		"   value3 = dynamicReadOnly ( getter returns actual value, no setter), initial: " <<
 		_value3 << "\n" <<
 		"   value4 = staticReadOnly ( static getter only ), initial: " <<
-		_value4 << "\n" << std::endl;
+		_value4 << "\n" <<
+		"   value5 = dynamicCalculated ( calculated property ), value used in calculation: " <<
+		_value5 << "\n" << std::endl;
 
 	std::cout << "value1: " << test.dynamicDefault << std::endl;
 	std::cout << "value2: " << test.dynamicReadWrite << std::endl;
 	std::cout << "value3: " << test.dynamicReadOnly << std::endl;
 	std::cout << "value4: " << test.staticReadOnly << std::endl;
+	std::cout << "value5: " << test.dynamicCalculated << std::endl;
 
 	std::cout << "\nSetting value1 to integer value " << _value1 + 14  << "." << std::endl;
 	test.dynamicDefault = _value1 + 14;
