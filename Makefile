@@ -1,20 +1,26 @@
-all: test
-
+all: world
 CXX?=g++
 CXXFLAGS?=--std=c++17
 
-INCLUDES:=-I./include -I.
+INCLUDES:=
 
-MAIN_OBJS:= \
+OBJS:= \
 	objs/main.o
 
-LIBS:=
+PROPERTY_DIR:=.
+include ./Makefile.inc
 
-objs/main.o: example/main.cpp
+world: example
+
+$(shell mkdir -p objs)
+
+objs/main.o: main.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c -o $@ $<;
 
-test: $(SHARED_OBJS) $(MAIN_OBJS)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ $(LIBS) -o $@;
+example: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -L. $(LIBS) $^ -o $@;
 
+.PHONY: clean
 clean:
-	rm -f objs/*.o test
+	@rm -rf objs
+	@rm -f example
