@@ -7,7 +7,7 @@ C++ properties, read only and/or dynamic getters
 
 ## <sub>Documentation</sub>
 
-Use case sample if provided in [example code](main.cpp)
+Use case sample is provided in [example code](main.cpp)
 
 ## <sub>Examples</sub>
 
