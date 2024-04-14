@@ -1,8 +1,7 @@
 all: world
+
 CXX?=g++
 CXXFLAGS?=--std=c++17
-
-INCLUDES:=
 
 OBJS:= \
 	objs/main.o
@@ -22,5 +21,4 @@ example: $(OBJS)
 
 .PHONY: clean
 clean:
-	@rm -rf objs
-	@rm -f example
+	@rm -rf objs example

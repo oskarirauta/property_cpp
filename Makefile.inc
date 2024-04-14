@@ -1,2 +1,2 @@
-PROPERTY_DIR?=property
-INCLUDES += -I./$(PROPERTY_DIR)/include
+PROPERTY_DIR?=./property
+INCLUDES += -I$(PROPERTY_DIR)/include
