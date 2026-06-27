@@ -2,6 +2,8 @@ name: "C++ CI build"
 run-name: ${{ github.actor }} executed build ${{ inputs.testname }}
 
 on:
+  push:
+  pull_request:
   workflow_dispatch:
     inputs:
       testname:
@@ -12,8 +14,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: submodules
-      run: git submodule update --init --recursive --remote
+    - uses: actions/checkout@v5
     - name: make
       run: make

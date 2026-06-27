@@ -1,7 +1,7 @@
 all: world
 
 CXX?=g++
-CXXFLAGS?=--std=c++17
+CXXFLAGS?=--std=c++17 -Wall -Wextra
 
 OBJS:= \
 	objs/main.o
